@@ -1,47 +1,69 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script>
+import Index from './components/index.vue'
+import navi from './components/navi.vue'
+import Login from './components/login.vue'
+import userProfile from './components/userProfile.vue'
+import proberData from './components/proberData.vue'
+import analyzer from './components/analyzer.vue'
+import { createApp, ref, onMounted} from 'vue'
+import { createStore } from 'vuex'
+
+const PageApp = createApp(Index);
+
+export default{
+  name:"MainPage",
+  components: {navi,},
+  data(){
+    return{
+      ShowLogin(){
+        const PageApp = createApp(Login);
+        PageApp.mount("#pages");
+      },
+      ShowIndex(){
+        const PageApp = createApp(Index);
+        PageApp.mount("#pages");
+      },
+      ShowUserProfile(){
+        const PageApp = createApp(userProfile);
+        PageApp.mount("#pages");
+      },ShowProberData(){
+        const PageApp = createApp(proberData);
+        PageApp.mount("#pages");
+      },ShowAnalyzer(){
+        const PageApp = createApp(analyzer);
+        PageApp.mount("#pages");
+      }
+    };
+  },
+  mounted(){
+    PageApp.mount("#pages");
+  }
+}
+
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div class="navi">
+      <navi/>
     </div>
   </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <child id="pages"></child>
 </template>
 
 <style scoped>
 header {
   line-height: 1.5;
+  margin: 0 auto
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+template{
+  
 }
 
 @media (min-width: 1024px) {
   header {
-    display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
   }
 }
 </style>
